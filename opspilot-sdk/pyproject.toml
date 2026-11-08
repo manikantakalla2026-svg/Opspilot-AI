@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "opspilot-sdk"
+version = "0.1.0"
+description = "Bounded, best-effort Python event reporting for OpsPilot AI"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["httpx>=0.28,<1"]
+
+[project.optional-dependencies]
+fastapi = ["fastapi>=0.115,<1"]
+test = ["pytest>=8,<10", "fastapi>=0.115,<1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

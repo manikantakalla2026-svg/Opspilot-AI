@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: opspilot-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers
+    healthCheckPath: /health
+    autoDeployTrigger: "off"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.9
+      - key: DATABASE_URL
+        sync: false
+      - key: WORKSPACE_TOKEN
+        sync: false
+      - key: FRONTEND_ORIGINS
+        sync: false
+      - key: AI_EXTERNAL_ENABLED
+        value: "false"
+      - key: GEMINI_MODEL
+        value: gemini-3.5-flash-lite
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: AI_DAILY_INVESTIGATION_LIMIT
+        value: "10"
+      - key: AI_GLOBAL_DAILY_REQUEST_LIMIT
+        value: "50"
